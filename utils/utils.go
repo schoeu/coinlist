@@ -1,8 +1,10 @@
 package utils
 
 import (
-	"log"
 	"database/sql"
+	"log"
+	"strings"
+	"time"
 )
 
 // error handler.
@@ -12,7 +14,7 @@ func ErrHandle(err error) {
 	}
 }
 
-// 创建数据库链接
+// db opener
 func OpenDb(dbTyepe string, dbStr string) *sql.DB {
 	if dbTyepe == "" {
 		dbTyepe = "mysql"
@@ -23,4 +25,9 @@ func OpenDb(dbTyepe string, dbStr string) *sql.DB {
 	err = db.Ping()
 	ErrHandle(err)
 	return db
+}
+
+func GetCurrentDate() string {
+	t := time.Now().String()
+	return strings.Split(t, " ")[0]
 }
