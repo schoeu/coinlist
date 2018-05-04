@@ -29,6 +29,8 @@ func main() {
 	url := config.URL
 	listInfo := getCoinsList(url)
 
+	defer db.Close()
+
 	var sqlArr []string
 	for _, v := range listInfo.Data {
 		var infos []string
