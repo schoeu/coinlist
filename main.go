@@ -5,6 +5,7 @@ import (
 	"./utils"
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"io/ioutil"
 	"net/http"
@@ -59,5 +60,7 @@ func storeData(db *sql.DB, sqlData []string) {
 
 	sqlStr := "INSERT INTO bt_listings (pid, name, symbol, website_slug, update_time) VALUES " + strings.Join(sqlData, ",")
 	_, err = db.Exec(sqlStr)
-	utils.ErrHandle(err)
+	if err == nil {
+		fmt.Println("updated coin list.")
+	}
 }
